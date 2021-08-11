@@ -162,7 +162,7 @@ resource "azurerm_app_service" "APIapp" {
   }
 }
   resource "azurerm_application_insights" "AppInsight" {
-  name                = "AppInsightforportal"
+  name                = "AppInsightportal"
   location            = azurerm_resource_group.RGroup.location
   resource_group_name = azurerm_resource_group.RGroup.name
   application_type    = "web"
