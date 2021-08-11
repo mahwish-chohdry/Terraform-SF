@@ -24,9 +24,8 @@ steps:
     displayName: "Create/Check the Terraform Statefile Azure Storage Account"
     inputs:
       azureSubscription: "Mahwish VS Enterprise Subscription – MPN(e09e8db9-bd86-48ae-8eeb-eda17abcc24a)"
-      addSpnToEnvironment: true
-      scriptType: "bash"
-      scriptLocation: "inlineScript"
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
       inlineScript: |
         TAGS=$(tf_state_tags)
         az group create --name $(tf_state_rg) --location $(tz_state_location) --tags "${TAGS[@]}"
@@ -34,6 +33,8 @@ steps:
         ACCOUNT_KEY=$(az storage account keys list --resource-group $(tf_state_rg) --account-name $(tf_state_sa_name) --query [0].value -o tsv)
         az storage container create --name $(tf_state_container_name) --account-name $(tf_state_sa_name) --account-key $ACCOUNT_KEY
         echo "##vso[task.setvariable variable=tf_state_sa_key]$ACCOUNT_KEY"
+      addSpnToEnvironment: true
+      useGlobalConfig: true
 
   - task: TerraformTaskV1@0
     displayName: "Run > terraform init"
