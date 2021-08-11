@@ -8,9 +8,9 @@
  
 trigger:
 - main
- 
+
 variables:
-tf_version: "0.12.26"
+tf_version:  "0.12.26"
 tf_state_rg: "tfstate-rg" 
 tz_state_location: "uksouth"
 tf_state_sa_name: "tfstatesmartfan"
