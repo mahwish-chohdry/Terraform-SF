@@ -42,7 +42,7 @@ resource "azurerm_eventhub_authorization_rule" "EHAuth" {
 }
 
 resource "azurerm_iothub" "IoTHub" {
-  name                = "IoTHubTerraform"
+  name                = "IoTHub-Terraform"
   resource_group_name = azurerm_resource_group.RGroup.name
   location            = azurerm_resource_group.RGroup.location
 
