@@ -1,14 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+ 
+trigger:
+- main
+ 
 variables:
   tf_state_rg: "tfstate-rg" # name of the resource group to create/use for the terraform state file
-  tz_state_location: "west us" # location of the resource group to create/use for the terraform state file
+  tz_state_location: "uksouth" # location of the resource group to create/use for the terraform state file
   tf_state_sa_name: "tfstatesmartfan" # name of of the storage account to create/use for the terraform state file
   tf_state_container_name: "tfstate" # name of of the container to create/use for the terraform state file
+  tf_state_tags: ("env=blogpost-terraform-devops-pipeline" "deployedBy=devops") # tags for the resources above which support tagging
+  tf_environment: "dev" # enviroment name, used for the statefile name
  
 pool:
   vmImage: ubuntu-latest
  
 steps:
-
+ 
   - task: AzureCLI@2
     displayName: "Create/Check the Terraform Statefile Azure Storage Account"
     inputs:
@@ -17,9 +27,9 @@ steps:
       scriptType: "bash"
       scriptLocation: "inlineScript"
       inlineScript: |
-    
-        az group create --name $(tf_state_rg) --location $(tz_state_location)
-        az storage account create --resource-group $(tf_state_rg) --name $(tf_state_sa_name) --sku Standard_GRS --encryption-services blob
+        TAGS=$(tf_state_tags)
+        az group create --name $(tf_state_rg) --location $(tz_state_location) --tags "${TAGS[@]}"
+        az storage account create --resource-group $(tf_state_rg) --name $(tf_state_sa_name) --sku Standard_GRS --encryption-services blob --tags "${TAGS[@]}"
         ACCOUNT_KEY=$(az storage account keys list --resource-group $(tf_state_rg) --account-name $(tf_state_sa_name) --query [0].value -o tsv)
         az storage container create --name $(tf_state_container_name) --account-name $(tf_state_sa_name) --account-key $ACCOUNT_KEY
         echo "##vso[task.setvariable variable=tf_state_sa_key]$ACCOUNT_KEY"
@@ -33,7 +43,7 @@ steps:
       backendAzureRmResourceGroupName: "$(tf_state_rg)"
       backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
       backendAzureRmContainerName: $(tf_state_container_name)
-      backendAzureRmKey: "terraform.tstate"
+      backendAzureRmKey: "$(tf_environment).terraform.tstate"
   
  
   - task: TerraformTaskV1@0
