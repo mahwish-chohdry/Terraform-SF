@@ -13,7 +13,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "RGroup" {
-  name     = "SmartFan-Terraform"
+  name     = "SmartFanTerraform"
   location = "West US"
 }
 
