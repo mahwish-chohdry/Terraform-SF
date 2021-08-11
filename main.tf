@@ -109,8 +109,8 @@ resource "azurerm_sql_database" "db01" {
   create_mode = "Default"
 
   import {
-    storage_uri                  =  "https://storagetestingsf.blob.core.windows.net/dbbackup/smartfan-fresh.bacpac"
-    storage_key                  =  "QpUb/DWG7wZp+cGkJjJMwjdypcUPpMACjXno6OSU4hnA4Ku6MVjPP/G4JV/LQvV3hkWDJ2wRBFZrSw9C7q7cEA=="
+    storage_uri                  =  "https://backupforterraform.blob.core.windows.net/smartfandbbackup/smart_fan_fresh_db"
+    storage_key                  =  "9to5r2pZgyjieiP6ALu2RyQdXTvWv/v0RlyxFCnHmu38/U/DXZwQXmFpQtW7dStleWQexxoZENUAxutTrLnfhQ=="
     storage_key_type             = "StorageAccessKey"
     administrator_login          = azurerm_sql_server.sql01.administrator_login
     administrator_login_password          = azurerm_sql_server.sql01.administrator_login_password
