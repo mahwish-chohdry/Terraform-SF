@@ -7,23 +7,20 @@ trigger:
 - main
  
 variables:
-  tf_version: "0.12.26" # what version of terraform should be used
+
   tf_state_rg: "tfstate-rg" # name of the resource group to create/use for the terraform state file
   tz_state_location: "uksouth" # location of the resource group to create/use for the terraform state file
-  tf_state_sa_name: "tfstatesmartfan" # name of of the storage account to create/use for the terraform state file
-  tf_state_container_name: "tfstate" # name of of the container to create/use for the terraform state file
+  tf_state_sa_name: "tffanboxmahwish" # name of of the storage account to create/use for the terraform state file
+  tf_state_container_name: "tfstatefile" # name of of the container to create/use for the terraform state file
   tf_state_tags: ("env=blogpost-terraform-devops-pipeline" "deployedBy=devops")
-  tf_environment: "dev" # enviroment name, used for the statefile name
+  tf_environment: "dedevelopment" # enviroment name, used for the statefile name
  
 pool:
   vmImage: ubuntu-latest
  
 steps:
-  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-    displayName: "Install Terraform $(tf_version)"
-    inputs:
-      terraformVersion: "$(tf_version)"
- 
+
+
   - task: AzureCLI@2
     displayName: "Create/Check the Terraform Statefile Azure Storage Account"
     inputs:
@@ -44,11 +41,11 @@ steps:
     inputs:
       command: "init"
       backendServiceArm: 'Mahwish VS Enterprise Subscription – MPN (e09e8db9-bd86-48ae-8eeb-eda17abcc24a)'
-      #workingDirectory: '$(System.DefaultWorkingDirectory)'
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
       backendAzureRmResourceGroupName: "$(tf_state_rg)"
       backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
       backendAzureRmContainerName: $(tf_state_container_name)
-      backendAzureRmKey: "$(tf_environment).terraform.tstate"
+      backendAzureRmKey: "terraform.tstate"
   
  
   - task: TerraformTaskV1@0
