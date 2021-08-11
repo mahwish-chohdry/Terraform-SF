@@ -27,7 +27,7 @@ steps:
   - task: AzureCLI@2
     displayName: "Create/Check the Terraform Statefile Azure Storage Account"
     inputs:
-      azureSubscription: 'Visual Studio Enterprise Subscription – MPN (cc792faa-b473-4bf9-b653-df2f67203324)'
+      azureSubscription: 'Mahwish VS Enterprise Subscription – MPN (e09e8db9-bd86-48ae-8eeb-eda17abcc24a)'
       addSpnToEnvironment: true
       scriptType: "bash"
       scriptLocation: "inlineScript"
@@ -43,7 +43,7 @@ steps:
     displayName: "Run > terraform init"
     inputs:
       command: "init"
-      backendServiceArm: 'Visual Studio Enterprise Subscription – MPN (cc792faa-b473-4bf9-b653-df2f67203324)'
+      backendServiceArm: 'Mahwish VS Enterprise Subscription – MPN (e09e8db9-bd86-48ae-8eeb-eda17abcc24a)'
       #workingDirectory: '$(System.DefaultWorkingDirectory)'
       backendAzureRmResourceGroupName: "$(tf_state_rg)"
       backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
@@ -55,10 +55,10 @@ steps:
     displayName: "Run > terraform plan"
     inputs:
       command: "plan"
-      environmentServiceNameAzureRM: 'Visual Studio Enterprise Subscription – MPN (cc792faa-b473-4bf9-b653-df2f67203324)'
+      environmentServiceNameAzureRM: 'Mahwish VS Enterprise Subscription – MPN (e09e8db9-bd86-48ae-8eeb-eda17abcc24a)'
  
   - task: TerraformTaskV1@0
     displayName: "Run > terraform apply"
     inputs:
       command: "apply"
-      environmentServiceNameAzureRM: 'Visual Studio Enterprise Subscription – MPN (cc792faa-b473-4bf9-b653-df2f67203324)'
+      environmentServiceNameAzureRM: 'Mahwish VS Enterprise Subscription – MPN (e09e8db9-bd86-48ae-8eeb-eda17abcc24a)'
