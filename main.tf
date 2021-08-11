@@ -170,7 +170,7 @@ resource "azurerm_app_service" "APIapp" {
 
 
 resource "azurerm_app_service" "PortalApp" {
-  name                = "PortalTerraform"
+  name                = "Portal-Terraform"
   location            = azurerm_resource_group.RGroup.location
   resource_group_name = azurerm_resource_group.RGroup.name
   app_service_plan_id = azurerm_app_service_plan.PortalPlan.id
