@@ -78,11 +78,6 @@ resource "azurerm_storage_container" "blob" {
   container_access_type = "blob"
 }
 
-resource "azurerm_storage_container" "blobabc" {
-  name                  = "dontknowwhat"
-  storage_account_name  = azurerm_storage_account.storage.name
-  container_access_type = "blob"
-}
 
 resource "azurerm_sql_server" "sql01" {
   name                         = "sqlserverterraform"
