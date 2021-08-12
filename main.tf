@@ -1,15 +1,11 @@
 
 terraform {
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-    }
-  }
-}
 
+backend "azurerm"{}
+}
 provider "azurerm" {
-    features {}
   # Configuration options
+  features{}
 }
 
 resource "azurerm_resource_group" "RGroup" {
@@ -42,7 +38,7 @@ resource "azurerm_eventhub_authorization_rule" "EHAuth" {
 }
 
 resource "azurerm_iothub" "IoTHub" {
-  name                = "IoTHub-Terraform"
+  name                = "IoTHubforTerraform"
   resource_group_name = azurerm_resource_group.RGroup.name
   location            = azurerm_resource_group.RGroup.location
 
