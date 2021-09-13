@@ -86,7 +86,7 @@ resource "azurerm_sql_server" "sql01" {
   version                      = "12.0"
   administrator_login          = "Mahwish"
   administrator_login_password = "Banana1234567"
-  sku_name                     = "Basic"
+  
 
 }
  
@@ -105,7 +105,9 @@ resource "azurerm_sql_database" "db01" {
   resource_group_name              = azurerm_sql_server.sql01.resource_group_name
   location                         = azurerm_sql_server.sql01.location
   server_name                      = azurerm_sql_server.sql01.name
-  create_mode = "Default"
+  edition                          = "Basic"
+  requested_service_objective_name = "B1"
+}
 
   import {
     storage_uri                  =  "https://backupforterraform.blob.core.windows.net/smartfandbbackup/smart_fan_fresh_db"
