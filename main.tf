@@ -86,6 +86,8 @@ resource "azurerm_sql_server" "sql01" {
   version                      = "12.0"
   administrator_login          = "Mahwish"
   administrator_login_password = "Banana1234567"
+  sku_name                     = "Basic"
+
 }
  
 resource "azurerm_sql_firewall_rule" "allowAzureServices" {
