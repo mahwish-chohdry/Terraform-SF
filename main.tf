@@ -106,7 +106,6 @@ resource "azurerm_sql_database" "db01" {
   location                         = azurerm_sql_server.sql01.location
   server_name                      = azurerm_sql_server.sql01.name
   edition                          = "Basic"
-  requested_service_objective_name = "B1"
 
   import {
     storage_uri                  =  "https://backupforterraform.blob.core.windows.net/smartfandbbackup/smart_fan_fresh_db"
