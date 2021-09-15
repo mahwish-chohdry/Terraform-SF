@@ -210,8 +210,8 @@ resource "azurerm_app_service_plan" "ASPfun" {
   application_type    = "web"
 } 
 
-resource "azurerm_function_app" "FunctionAppT" {
-  name                       = "FunctionApp-Terraform"
+resource "azurerm_function_app" "FunctionApp1" {
+  name                       = "FunctionAppofTerraform"
   location                   = azurerm_resource_group.RGroup.location
   resource_group_name        = azurerm_resource_group.RGroup.name
   app_service_plan_id        = azurerm_app_service_plan.ASPfun.id
