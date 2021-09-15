@@ -199,8 +199,8 @@ resource "azurerm_app_service_plan" "ASPfun" {
   resource_group_name = azurerm_resource_group.RGroup.name
  kind      = "Windows"
   sku {
-    tier = "Free"
-    size = "F1"
+    tier = "Dynamic"
+    size = "Y1"
   }
 }
  resource "azurerm_application_insights" "AppInsightFunctionApp" {
@@ -211,7 +211,7 @@ resource "azurerm_app_service_plan" "ASPfun" {
 } 
 
 resource "azurerm_function_app" "FunctionAppT" {
-  name                       = "FunctionAppofTerraform"
+  name                       = "FunctionApp-Terraform"
   location                   = azurerm_resource_group.RGroup.location
   resource_group_name        = azurerm_resource_group.RGroup.name
   app_service_plan_id        = azurerm_app_service_plan.ASPfun.id
