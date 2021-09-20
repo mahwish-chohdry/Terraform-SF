@@ -21,6 +21,14 @@ resource "azurerm_eventhub_namespace" "EHName" {
   capacity            = 1
 
 }
+resource "azurerm_eventhub_namespace_authorization_rule" "Rules" {
+  name                = "RootManageSharedAccessKey"
+  namespace_name      = azurerm_eventhub_namespace.EHName.name
+  resource_group_name = azurerm_resource_group.RGroup.name
+  listen = true
+  send   = true
+  manage = true
+}
 
 resource "azurerm_eventhub" "EventHub" {
   name                = "InstanceTerraform"
@@ -219,7 +227,7 @@ resource "azurerm_function_app" "FunctionApp1" {
   storage_account_access_key = azurerm_storage_account.SAfunction.primary_access_key
 app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.AppInsightFunctionApp.instrumentation_key
-    "Connectionstring"   =  azurerm_eventhub_namespace.EHName.primery_connection_string
+    "Connectionstring"   =  azurerm_eventhub_namespace.EHName.default_primery_connection_string
   }
 }
 resource "azurerm_notification_hub_namespace" "namespace" {
