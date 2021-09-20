@@ -219,7 +219,7 @@ resource "azurerm_function_app" "FunctionApp1" {
   storage_account_access_key = azurerm_storage_account.SAfunction.primary_access_key
 app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.AppInsightFunctionApp.instrumentation_key
-    "Connectionstring"   =  azurerm_eventhub_namespace.EHName.RootManageSharedAccessKey.default_primery_connection_string
+    "Connectionstring"   =  azurerm_eventhub_namespace.EHName.primery_connection_string
   }
 }
 resource "azurerm_notification_hub_namespace" "namespace" {
